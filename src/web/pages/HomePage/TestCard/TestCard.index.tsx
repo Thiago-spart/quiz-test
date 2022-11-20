@@ -16,7 +16,7 @@ export const TestCard: React.FC<TestCardTypes> = ({
 	const handleRedirectToTestPage = () => {
 		router.push({
 			pathname: `/quiz/${testLink}`,
-			query: JSON.stringify(testData),
+			query: { data: JSON.stringify(testData) },
 		});
 	};
 

@@ -7,7 +7,21 @@ export const Container = styled.main`
 	flex-direction: column;
 	height: 100%;
 	padding: 2rem;
-	gap: 1rem;
+	gap: clamp(2rem, 1vw, 4rem);
+`;
+
+export const NavContainer = styled.nav`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	ul {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+		gap: 1rem;
+
+		width: 100%;
+	}
 `;
 
 export const TitleContainer = styled.div`
