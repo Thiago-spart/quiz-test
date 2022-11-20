@@ -1,5 +1,8 @@
 /* eslint-disable react/no-array-index-key */
+import { useRouter } from "next/router";
+
 import React from "react";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 import { HeadTitle } from "web/components/HeadTitle";
 import { NavQuestions } from "web/components/NavQuestions/NavQuestions.index";
@@ -15,6 +18,14 @@ export const TestPage: React.FC<TestPageProps> = ({ data }) => {
 	const [selectedAnswers, setSelectedAnswers] = React.useState<Array<string>>(
 		Array.from(Array(data.questions.length)).fill(""),
 	);
+	const router = useRouter();
+
+	const handleFinishTest = () => {
+		router.push({
+			pathname: `/quiz/${data.meta_link}/final-result`,
+			query: { data: JSON.stringify({ selectedAnswers, data }) },
+		});
+	};
 
 	const handleSelectQuestion = (questionIdx: number) => {
 		setActiveQuestion(questionIdx);
@@ -25,6 +36,14 @@ export const TestPage: React.FC<TestPageProps> = ({ data }) => {
 		tempArr[questionIdx] = newAnswer;
 
 		setSelectedAnswers(tempArr);
+	};
+
+	const handleNextQuestion = () => {
+		setActiveQuestion(activeQuestion + 1);
+	};
+
+	const handlePreviousQuestion = () => {
+		setActiveQuestion(activeQuestion - 1);
 	};
 
 	return (
@@ -50,6 +69,30 @@ export const TestPage: React.FC<TestPageProps> = ({ data }) => {
 					handleSelectAnswer={handleSignAnswer}
 					question={data.questions[activeQuestion]}
 				/>
+
+				<S.ControlPainel>
+					<button
+						type="button"
+						onClick={handlePreviousQuestion}
+						disabled={activeQuestion === 0}
+					>
+						<AiOutlineArrowLeft />
+					</button>
+					<S.FinishButton
+						type="button"
+						isAllQuestionsSign={!selectedAnswers.includes("")}
+						onClick={handleFinishTest}
+					>
+						Finalizar
+					</S.FinishButton>
+					<button
+						type="button"
+						onClick={handleNextQuestion}
+						disabled={activeQuestion === data.questions.length - 1}
+					>
+						<AiOutlineArrowRight />
+					</button>
+				</S.ControlPainel>
 			</S.Container>
 		</>
 	);
