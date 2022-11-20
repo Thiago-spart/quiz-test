@@ -1,11 +1,23 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
-import type { HomePageProps } from "./HomePage.types";
+import { testApi } from "services/api/testApi";
+
+import type { TestProps } from "../../../types/interfaces/testData";
 
 import * as S from "./HomePage.styled";
 import { TestCard } from "./TestCard/TestCard.index";
 
-export const HomePage: React.FC<HomePageProps> = ({ data }) => {
+export const HomePage: React.FC = () => {
+	const fetchTests = (): Promise<Array<TestProps>> =>
+		testApi.get("tests").then(response => response.data);
+
+	const { data } = useQuery({
+		queryKey: ["tests"],
+		queryFn: fetchTests,
+		staleTime: 300,
+	});
+
 	return (
 		<S.Container>
 			<S.TitleContainer>
@@ -17,7 +29,7 @@ export const HomePage: React.FC<HomePageProps> = ({ data }) => {
 			</S.TitleContainer>
 
 			<S.QuizContainer>
-				{data.tests.map(test => (
+				{data?.map(test => (
 					<TestCard
 						title={test.name}
 						subtitle={test.description}
