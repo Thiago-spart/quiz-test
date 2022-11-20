@@ -1,7 +1,8 @@
 import { css } from "styled-components";
 
 export const colors = css`
-	--background-color: rgba(215, 215, 215, 1);
+	--white: rgba(215, 215, 215, 1);
+	--background-color: var(--white);
 	--text-color: #050412;
 
 	--purple-900: #581c87;
