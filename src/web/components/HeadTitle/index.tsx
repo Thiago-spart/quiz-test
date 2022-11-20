@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { SITE } from "src/config/site";
+import { SITE } from "configs/site";
 
 import type { HeadTitleProps } from "./types";
 

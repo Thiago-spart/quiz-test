@@ -38,7 +38,8 @@ export const HomePage: React.FC = () => {
 							title={test.name}
 							subtitle={test.description}
 							bannerImgUrl={test.banner_image}
-							testLink="#"
+							testLink={test.meta_link}
+							testData={test}
 							key={test.id}
 						/>
 					))}
