@@ -5,9 +5,13 @@ import { fonts } from "styles/fonts";
 export const Container = styled.main`
 	display: flex;
 	flex-direction: column;
-	height: 100%;
+	min-height: 100vh;
 	padding: 2rem;
 	gap: clamp(2rem, 1vw, 4rem);
+
+	& > div:last-child {
+		margin-top: auto;
+	}
 `;
 
 export const NavContainer = styled.nav`
@@ -46,4 +50,44 @@ export const TitleContainer = styled.div`
 	p {
 		${fonts.text4}
 	}
+`;
+
+export const ControlPainel = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	width: 100%;
+
+	align-self: flex-end;
+
+	button {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		font-weight: 300;
+		font-size: 1.6rem;
+		line-height: 2rem;
+		letter-spacing: 0.15rem;
+		border-radius: 0.25rem;
+		padding: 1.2rem 1rem;
+		transition: 0.2s;
+		width: 100%;
+		border: 1px solid var(--purple-900);
+		color: var(--purple-900);
+		background-color: var(--purple-50);
+
+		&:focus-visible,
+		&:not(:disabled):hover {
+			background: var(--purple-900);
+			color: var(--white);
+			box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+		}
+	}
+`;
+
+export const FinishButton = styled.button<{ isAllQuestionsSign: boolean }>`
+	display: ${({ isAllQuestionsSign }) =>
+		isAllQuestionsSign ? "flex" : "none"} !important;
 `;
