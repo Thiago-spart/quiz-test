@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 import type { TestCardTypes } from "./TestCard.types";
 
@@ -9,17 +9,25 @@ export const TestCard: React.FC<TestCardTypes> = ({
 	subtitle,
 	title,
 	testLink,
+	testData,
 }) => {
-	return (
-		<Link href={testLink}>
-			<S.Container>
-				<img src={bannerImgUrl} alt={title} />
+	const router = useRouter();
 
-				<S.TitleContainer>
-					<h4>{title}</h4>
-					<p>{subtitle}</p>
-				</S.TitleContainer>
-			</S.Container>
-		</Link>
+	const handleRedirectToTestPage = () => {
+		router.push({
+			pathname: `/quiz/${testLink}`,
+			query: JSON.stringify(testData),
+		});
+	};
+
+	return (
+		<S.Container onClick={handleRedirectToTestPage}>
+			<img src={bannerImgUrl} alt={title} />
+
+			<S.TitleContainer>
+				<h4>{title}</h4>
+				<p>{subtitle}</p>
+			</S.TitleContainer>
+		</S.Container>
 	);
 };

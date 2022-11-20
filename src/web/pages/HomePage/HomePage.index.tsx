@@ -3,6 +3,8 @@ import React from "react";
 
 import { testApi } from "services/api/testApi";
 
+import { HeadTitle } from "web/components/HeadTitle";
+
 import type { TestProps } from "../../../types/interfaces/testData";
 
 import * as S from "./HomePage.styled";
@@ -19,26 +21,30 @@ export const HomePage: React.FC = () => {
 	});
 
 	return (
-		<S.Container>
-			<S.TitleContainer>
-				<h1>
-					Quiz<span>App</span>
-				</h1>
+		<>
+			<HeadTitle title="Home" />
+			<S.Container>
+				<S.TitleContainer>
+					<h1>
+						Quiz<span>App</span>
+					</h1>
 
-				<p>Selecione o test 😉 e comesse a praticar.</p>
-			</S.TitleContainer>
+					<p>Selecione o test 😉 e comesse a praticar.</p>
+				</S.TitleContainer>
 
-			<S.QuizContainer>
-				{data?.map(test => (
-					<TestCard
-						title={test.name}
-						subtitle={test.description}
-						bannerImgUrl={test.banner_image}
-						testLink="#"
-						key={test.id}
-					/>
-				))}
-			</S.QuizContainer>
-		</S.Container>
+				<S.QuizContainer>
+					{data?.map(test => (
+						<TestCard
+							title={test.name}
+							subtitle={test.description}
+							bannerImgUrl={test.banner_image}
+							testLink={test.meta_link}
+							testData={test}
+							key={test.id}
+						/>
+					))}
+				</S.QuizContainer>
+			</S.Container>
+		</>
 	);
 };
