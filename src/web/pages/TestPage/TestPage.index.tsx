@@ -22,8 +22,8 @@ export const TestPage: React.FC<TestPageProps> = ({ data }) => {
 
 	const handleFinishTest = () => {
 		router.push({
-			pathname: `/quiz/${data.meta_link}/final-result`,
-			query: { data: JSON.stringify({ selectedAnswers, data }) },
+			pathname: "/quiz/final-result",
+			query: { data: JSON.stringify({ selectedAnswers, data: data.id }) },
 		});
 	};
 
